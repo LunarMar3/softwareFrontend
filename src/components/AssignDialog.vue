@@ -44,7 +44,6 @@ const form = reactive({
   assigneeId: null,
 });
 
-// 在组件挂载时，获取部门列表
 onMounted(() => {
   fetchDepartments();
 });
@@ -58,7 +57,7 @@ const fetchDepartments = async () => {
 };
 
 const handleDepartmentChange = async (deptId) => {
-  form.assigneeId = null; // 清空已选人员
+  form.assigneeId = null;
   users.value = [];
   if (!deptId) return;
   try {
@@ -73,7 +72,7 @@ const submitForm = async () => {
     ElMessage.warning('请选择要指派的人员');
     return;
   }
-  
+
   try {
     const payload = {
       id: props.workOrderId,

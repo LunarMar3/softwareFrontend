@@ -16,7 +16,7 @@
         <el-descriptions-item label="优先级">
           {{ priorityMap[workOrderDetail.priority] || '未知' }}
         </el-descriptions-item>
-        
+
         <el-descriptions-item label="创建时间">{{ formatTime(workOrderDetail.createdAt) }}</el-descriptions-item>
         <el-descriptions-item label="更新时间">{{ formatTime(workOrderDetail.updatedAt) }}</el-descriptions-item>
         <el-descriptions-item label="截止日期">{{ formatTime(workOrderDetail.deadline) || '未设置' }}</el-descriptions-item>
@@ -46,7 +46,7 @@ import { getWorkOrderByIdAPI } from '../api';
 
 const props = defineProps({
   visible: Boolean,
-  workOrderId: Number, // 接收要查询的工单ID
+  workOrderId: Number,
 });
 
 const emit = defineEmits(['update:visible']);
@@ -69,7 +69,7 @@ const formatTime = (timeStr, emptyText = '') => {
 const fetchDetails = async () => {
   if (!props.workOrderId) return;
   loading.value = true;
-  workOrderDetail.value = null; // 先清空旧数据
+  workOrderDetail.value = null;
   try {
     const data = await getWorkOrderByIdAPI(props.workOrderId);
     workOrderDetail.value = data;
@@ -81,7 +81,6 @@ const fetchDetails = async () => {
 };
 
 onMounted(() => {
-  // 组件被创建并挂载后，立即获取数据
   fetchDetails();
 });
 

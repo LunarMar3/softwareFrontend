@@ -68,7 +68,6 @@ const props = defineProps({
   },
 });
 
-// 定义emit事件，用于通知父组件关闭弹窗和提交成功
 const emit = defineEmits(['update:visible', 'submit-success']);
 
 const formRef = ref(null);

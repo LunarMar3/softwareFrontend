@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-// 懒加载导入所有页面组件
 const Login = () => import('../views/Login.vue');
 const Register = () => import('../views/Register.vue');
 const MainLayout = () => import('../layout/MainLayout.vue');
@@ -14,17 +13,15 @@ const routes = [
     { path: '/register', name: 'Register', component: Register },
     {
         path: '/dashboard',
-        component: MainLayout, // 使用主布局
-        redirect: '/dashboard/daily-data', // 默认显示每日数据页
+        component: MainLayout,
+        redirect: '/dashboard/daily-data',
         beforeEnter: (to, from, next) => {
-          // 路由守卫：如果未登录，则不允许访问
           if (localStorage.getItem('token')) {
             next();
           } else {
             next('/login');
           }
         },
-        // 定义子路由
         children: [
             {
                 path: 'daily-data',
@@ -33,8 +30,8 @@ const routes = [
             },
             {
                 path: 'all-related',
-                component: WorkOrderList, 
-                meta: { title: '全部相关工单', fetchAll: true } 
+                component: WorkOrderList,
+                meta: { title: '全部相关工单', fetchAll: true }
             },
             {
                 path: 'unprocessed',

@@ -74,7 +74,7 @@ const sendCode = async () => {
   }
   isSending.value = true;
   countdown.value = 60;
-  
+
   const timer = setInterval(() => {
     countdown.value--;
     if (countdown.value <= 0) {
@@ -87,7 +87,6 @@ const sendCode = async () => {
     await sendSmsAPI({ email: registerForm.email });
     ElMessage.success('验证码发送成功，请注意查收！');
   } catch (error) {
-     // 出错时，也需要恢复按钮状态
      clearInterval(timer);
      countdown.value = 0;
      isSending.value = false;
@@ -114,7 +113,6 @@ const goToLogin = () => {
 </script>
 
 <style scoped>
-/* 样式与登录页类似，保持风格统一 */
 .register-container {
   display: flex;
   justify-content: center;

@@ -50,15 +50,11 @@ const submitForm = () => {
     if (valid) {
       try {
         const token = await loginAPI(loginForm);
-        // 登录成功
         ElMessage.success('登录成功！');
-        // 将token存入localStorage，用于后续的身份验证
         localStorage.setItem('token', token);
-        // 跳转到主页面
         router.push('/dashboard');
       } catch (error) {
         console.error('登录失败:', error);
-        // 错误消息已在api/index.js中统一处理，这里无需重复提示
       }
     }
   });

@@ -10,7 +10,7 @@
       <el-form-item v-if="actionType === 'complete'" label="解决方案" prop="solution">
         <el-input v-model="form.solution" type="textarea" placeholder="请输入解决方案" />
       </el-form-item>
-      
+
       <el-form-item label="备注" prop="comment">
         <el-input v-model="form.comment" type="textarea" placeholder="请输入备注信息" />
       </el-form-item>
@@ -40,7 +40,6 @@ const form = reactive({
   comment: '',
 });
 
-// 根据操作类型，动态计算弹窗标题
 const dialogTitle = computed(() => {
   const titles = {
     complete: '完成工单预案',
@@ -71,10 +70,10 @@ const submitAction = async () => {
       default:
         throw new Error('未知的操作类型');
     }
-    
+
     ElMessage.success('操作成功！');
-    emit('action-success'); // 通知父组件操作成功
-    emit('update:visible', false); // 关闭弹窗
+    emit('action-success');
+    emit('update:visible', false);
   } catch (error) {
     console.error('操作失败:', error);
   }

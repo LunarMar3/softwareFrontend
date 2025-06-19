@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>{{ pageTitle }}</h1>
-    <el-table 
-      :data="workOrderList" 
-      stripe 
+    <el-table
+      :data="workOrderList"
+      stripe
       v-loading="loading"
       @row-click="handleRowClick"
       style="cursor: pointer;"
@@ -12,7 +12,7 @@
       <el-table-column prop="title" label="标题" width="180" />
       <el-table-column prop="description" label="描述" show-overflow-tooltip />
       <el-table-column prop="status" label="状态" width="100" />
-      
+
       <el-table-column label="操作" width="200px" align="center">
         <template #default="scope">
           <el-button
@@ -90,7 +90,7 @@ const workOrderList = ref([]);
 const pageTitle = ref('');
 const loading = ref(false);
 const currentPage = ref(1);
-const total = ref(1000); 
+const total = ref(1000);
 let hasMore = true;
 const assignDialogVisible = ref(false);
 
@@ -119,13 +119,10 @@ const handleFinish = async (row) => {
         type: 'warning',
       }
     );
-    // 用户点击“确定”后，才会执行下面的代码
     await finishWorkOrderAPI({ id: row.id });
     ElMessage.success('工单已成功完成！');
-    // 调用通用的成功回调，刷新列表
     handleActionSuccess();
   } catch (error) {
-    // 如果用户点击“取消”，会进入catch块
     if (error !== 'cancel') {
       console.error('完成工单失败:', error);
     } else {
@@ -141,7 +138,6 @@ const handleAction = (row, actionType) => {
 
 const handleActionSuccess = () => {
   ElMessage.info('列表即将刷新...');
-  // 重新加载当前页的数据
   fetchData(currentPage.value);
 };
 const fetchData = async (page) => {
@@ -149,7 +145,7 @@ const fetchData = async (page) => {
     ElMessage.info('已经是最后一页了');
     return;
   }
-  
+
   loading.value = true;
   pageTitle.value = route.meta.title;
 
@@ -161,7 +157,7 @@ const fetchData = async (page) => {
       const status = route.meta.status;
       data = await getWorkOrdersByStatusAPI(status, page);
     }
-    
+
     if (!data || data.length === 0) {
       if (page > 1) {
         ElMessage.info('已经是最后一页了');
