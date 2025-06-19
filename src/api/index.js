@@ -6,7 +6,6 @@ const api = axios.create({
     timeout: 10000,
 });
 
-// ⭐ 新增：请求拦截器
 api.interceptors.request.use(
     config => {
         // 从localStorage获取token
@@ -76,3 +75,29 @@ export const getWorkOrdersByStatusAPI = (status, index = 1) => api.get(`/workOrd
 // 日志模块
 export const getApprovalLogsAPI = (index = 1) => api.get(`/approvalLog/getAll?index=${index}`);
 export const getWorkOrderLogsAPI = (index = 1) => api.get(`/workOrderLog/getAll?index=${index}`);
+
+// 获取所有部门
+export const getAllDepartmentsAPI = () => api.get('/department/getAll');
+
+// 根据部门ID获取用户
+export const getUsersByDepartmentIdAPI = (departmentId) => api.get(`/account/getUsersByDepartmentId?departmentId=${departmentId}`);
+
+// 提交新的工单
+export const createNewWorkOrderAPI = (data) => api.post('/workOrder/newWorkOrder', data);
+
+export const getAllWorkOrdersAPI = (index = 1) => api.get(`/workOrder/getAll?index=${index}`);
+
+export const getWorkOrderByIdAPI = (workOrderId) => api.get(`/workOrder/getWorkOrderById?workOrderId=${workOrderId}`);
+
+// 完成工单预案
+export const completeWorkOrderAPI = (data) => api.post('/workOrder/complete', data);
+
+// 审批通过工单
+export const approveWorkOrderAPI = (data) => api.post('/workOrder/approve', data);
+
+// 审批拒绝工单
+export const rejectWorkOrderAPI = (data) => api.post('/workOrder/reject', data);
+
+export const assignWorkOrderAPI = (data) => api.post('/workOrder/assign', data);
+
+export const finishWorkOrderAPI = (data) => api.post('/workOrder/finish', data);

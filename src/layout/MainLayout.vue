@@ -16,6 +16,10 @@
           <el-icon><DataAnalysis /></el-icon>
           <span>每日数据</span>
         </el-menu-item>
+         <el-menu-item index="/dashboard/all-related">
+          <el-icon><FolderChecked /></el-icon>
+          <span>全部相关</span>
+        </el-menu-item>
         <el-menu-item index="/dashboard/unprocessed">
           <el-icon><Warning /></el-icon>
           <span>未处理</span>
@@ -23,6 +27,10 @@
         <el-menu-item index="/dashboard/pending-approval">
           <el-icon><EditPen /></el-icon>
           <span>待审批</span>
+        </el-menu-item>
+        <el-menu-item index="/dashboard/approved">
+          <el-icon><Select /></el-icon>
+          <span>已审批</span>
         </el-menu-item>
         <el-menu-item index="/dashboard/to-complete">
           <el-icon><List /></el-icon>
@@ -41,6 +49,9 @@
     
     <el-container>
       <el-header class="header">
+        <el-button type="primary" :icon="Plus" @click="openNewOrderDialog">
+          新建工单
+        </el-button>
         <div class="header-title">欢迎使用</div>
         <el-dropdown>
           <span class="el-dropdown-link">
@@ -59,9 +70,15 @@
       </el-main>
     </el-container>
   </el-container>
+  <new-work-order-dialog
+    v-if="newOrderDialogVisible"
+    v-model:visible="newOrderDialogVisible"
+    @submit-success="handleNewOrderSuccess"
+  />
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { logoutAPI } from '../api';
 import { ElMessage, ElMessageBox } from 'element-plus';
@@ -72,11 +89,26 @@ import {
   List,
   CircleCheck,
   Document,
-  ArrowDown
+  ArrowDown,
+  Plus,
+  Select,
+  FolderChecked
 } from '@element-plus/icons-vue'
+import NewWorkOrderDialog from '../components/NewWorkOrderDialog.vue';
 
 const router = useRouter();
+const newOrderDialogVisible = ref(false);
 
+const openNewOrderDialog = () => {
+  newOrderDialogVisible.value = true;
+};
+
+const handleNewOrderSuccess = () => {
+  ElMessage.info('正在刷新列表...');
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+};
 const handleLogout = () => {
   ElMessageBox.confirm('您确定要退出登录吗?', '提示', {
     confirmButtonText: '确定',
@@ -128,5 +160,17 @@ const handleLogout = () => {
 }
 .el-main {
   background-color: #f0f2f5;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.header-title {
+  margin-right: 20px;
 }
 </style>

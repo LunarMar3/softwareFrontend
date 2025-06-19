@@ -32,6 +32,11 @@ const routes = [
                 meta: { title: '每日数据' }
             },
             {
+                path: 'all-related',
+                component: WorkOrderList, 
+                meta: { title: '全部相关工单', fetchAll: true } 
+            },
+            {
                 path: 'unprocessed',
                 component: WorkOrderList,
                 meta: { title: '未处理工单', status: 0 }
@@ -42,9 +47,14 @@ const routes = [
                 meta: { title: '待审批工单', status: 2 } // API: 审批中
             },
             {
+                path: 'approved',
+                component: WorkOrderList,
+                meta: { title: '已审批工单', status: 5 } // API: 已审批
+            },
+            {
                 path: 'to-complete',
                 component: WorkOrderList,
-                meta: { title: '待完成工单', status: 5 } // API: 已审批
+                meta: { title: '待完成工单', status: 7 } // API: 已指派
             },
             {
                 path: 'completed',
