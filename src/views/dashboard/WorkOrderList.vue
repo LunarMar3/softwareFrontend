@@ -55,10 +55,8 @@
     </el-table>
 
     <div class="pagination-container">
-       </div>
-
-    <work-order-detail-dialog
-       />
+      <el-pagination background layout="prev, pager, next" :current-page="currentPage" :page-size="10" :total="total" @current-change="handlePageChange" />
+       </div> <work-order-detail-dialog v-if="detailDialogVisible" v-model:visible="detailDialogVisible" :work-order-id="selectedWorkOrderId" />
 
     <action-dialog
       v-if="actionDialogVisible"
