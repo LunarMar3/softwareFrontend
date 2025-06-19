@@ -41,7 +41,7 @@
     'dark': #d4d7de,
     'darker': #cdd0d6,
   ),
-  
+
   // --- 背景色 ---
   $fill-color: (
     '': #f0f2f5,
@@ -55,3 +55,4 @@
 );
 
 @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
+@use "element-plus/theme-chalk/src/index.scss" as *;
