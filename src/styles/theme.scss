@@ -1,0 +1,57 @@
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    // --- 主题色 ---
+    'primary': (
+      'base': #009688,
+    ),
+    // --- 功能色 ---
+    'success': (
+      'base': #22c55e,
+    ),
+    'warning': (
+      'base': #f59e0b,
+    ),
+    'danger': (
+      'base': #ef4444,
+    ),
+    'error': (
+      'base': #ef4444,
+    ),
+    'info': (
+      'base': #64748b,
+    ),
+  ),
+
+  // --- 圆角配置 ---
+  // 你可以改成 0px (直角), 2px (微圆角), 或 8px (更圆润)
+  $border-radius: (
+    'base': 4px,
+    'small': 2px,
+    'round': 20px,
+    'circle': 100%,
+  ),
+
+  // --- 边框颜色 ---
+  $border-color: (
+    '': #dcdfe6,
+    'light': #e4e7ed,
+    'lighter': #ebeef5,
+    'extra-light': #f2f6fc,
+    'dark': #d4d7de,
+    'darker': #cdd0d6,
+  ),
+  
+  // --- 背景色 ---
+  $fill-color: (
+    '': #f0f2f5,
+    'light': #f5f7fa,
+    'lighter': #fafafa,
+    'extra-light': #fafcff,
+    'dark': #ebedf0,
+    'darker': #e6e8eb,
+    'blank': #ffffff,
+  )
+);
+
+@use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
